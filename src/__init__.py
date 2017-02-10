@@ -139,16 +139,16 @@ class FrozenColor(tuple):
     def from_int(cls, integer):
         return cls.from_cdata(lib.TDL_color_from_int(integer))
 
-    __mul__ = Color.__mul__
-    __add__ = Color.__add__
-    __sub__ = Color.__sub__
+    __mul__ = Color.__mul__.__func__
+    __add__ = Color.__add__.__func__
+    __sub__ = Color.__sub__.__func__
 
     def __repr__(self):
         return "<%s%s>" % (self.__class__.__name__, tuple.__repr__(self))
 
-    _get_r = Color._get_r
-    _get_g = Color._get_g
-    _get_b = Color._get_b
+    _get_r = Color._get_r.__func__
+    _get_g = Color._get_g.__func__
+    _get_b = Color._get_b.__func__
     def _set_rgb(self):
         raise TypleError('can not assign colors directally to %s' %
                          (self.__class__))
@@ -157,7 +157,7 @@ class FrozenColor(tuple):
     g = property(_get_g, _set_rgb)
     b = property(_get_b, _set_rgb)
 
-    __int__ = Color.__int__
+    __int__ = Color.__int__.__func__
 
 class Key(object):
     def __init__(self):
